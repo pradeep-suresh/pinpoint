@@ -1,2 +1,1 @@
-# pinpoint
-URL Shortener for Pinpoint Predictive
+# URL Shortener for Pinpoint Predictive
