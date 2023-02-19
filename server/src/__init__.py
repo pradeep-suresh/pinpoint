@@ -1,24 +1,32 @@
 import os
+import sys
+
 
 from flask import Flask, jsonify
 from flask_restx import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+db = SQLAlchemy()
 
-api = Api(app)
+def create_app(script_info=None):
 
-app_settings = os.getenv('APP_SETTINGS')
-app.config.from_object(app_settings)
+    # instantiate the app
+    app = Flask(__name__)
 
-db = SQLAlchemy(app)
+    # set config
+    app_settings = os.getenv('APP_SETTINGS')
+    app.config.from_object(app_settings)
 
-class Ping(Resource):
-    def get(self):
-        return {
-            'status' : 'success',
-            'message': 'pong!'
-        }
+    print(app.config, file=sys.stderr)
+    
+    # set up extensions
+    db.init_app(app)
 
+    # register blueprints
+    from src.api.ping import ping_blueprint
+    app.register_blueprint(ping_blueprint)
 
-api.add_resource(Ping, '/ping')
+    from src.api.urls import urls_blueprint
+    app.register_blueprint(urls_blueprint)
+
+    return app

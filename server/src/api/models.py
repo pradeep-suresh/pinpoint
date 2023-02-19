@@ -3,7 +3,7 @@ from sqlalchemy.sql import func
 from src import db
 
 
-class User(db.Model):
+class Url(db.Model):
 
     __tablename__ = 'urls'
 
@@ -13,7 +13,6 @@ class User(db.Model):
     active = db.Column(db.Boolean(), default=True, nullable=False)
     created_date = db.Column(db.DateTime, default=func.now(), nullable=False)
 
-    def __init__(self, id, url, shortcode):
-        self.id = id
+    def __init__(self, url, shortcode):
         self.url = url
         self.shortcode = shortcode
