@@ -28,5 +28,8 @@ def create_app(script_info=None):
 
     from src.api.urls import urls_blueprint
     app.register_blueprint(urls_blueprint)
+    
+    from src.api.redirect import redirect_blueprint
+    app.register_blueprint(redirect_blueprint)
 
     return app
