@@ -5,6 +5,7 @@ import sys
 from flask import Flask, jsonify
 from flask_restx import Resource, Api
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 db = SQLAlchemy()
 
@@ -12,6 +13,11 @@ def create_app(script_info=None):
 
     # instantiate the app
     app = Flask(__name__)
+    cors = CORS(app, resources = {
+        '/shortener/*' : {
+            'origins' : 'http://localhost:3000'
+        }
+    })
 
     # set config
     app_settings = os.getenv('APP_SETTINGS')

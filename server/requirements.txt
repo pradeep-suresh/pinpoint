@@ -26,3 +26,4 @@ typing_extensions==4.5.0
 Werkzeug==2.2.3
 zipp==3.14.0
 base58==2.1.1
+Flask-Cors==3.0.10
