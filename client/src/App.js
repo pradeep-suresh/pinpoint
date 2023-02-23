@@ -1,23 +1,21 @@
 import React from 'react'
-import AddButtonView  from './feature/AddButton/AddButtonView';
-import DropDownView from './feature/DropDown/DropDownView'
+
+import ToolBarView from './feature/ToolBar/ToolBarView';
 import UrlTableView from './feature/UrlTable/UrlTableView';
 import FooterView from './feature/Footer/FooterView';
 
+import './App.css'
+
 const App = () => {
 
-
   return (
-    <div>
-      <div>
+    <div className='container'>
         <h2>
           Url Shortener
         </h2>
-        <DropDownView />
-        <AddButtonView />
+        <ToolBarView />
         <UrlTableView />
         <FooterView/>
-      </div>
     </div>
   );
 };

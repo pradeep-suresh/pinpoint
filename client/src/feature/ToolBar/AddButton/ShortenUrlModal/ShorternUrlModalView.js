@@ -7,8 +7,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-import { addUrl, fetchUrls } from '../../UrlTable/UrlTableSlice';
+import { addUrl, fetchUrls } from '../../../UrlTable/UrlTableSlice';
 import { useDispatch, useSelector } from 'react-redux';
+
+import './ShorternUrlModal.css'
 
 const style = {
     position: 'absolute',
@@ -44,7 +46,7 @@ const ShorternUrlModalView = (props) => {
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                     Shortern URL
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                <Typography id="modal-modal-description" sx={{ mt: 2 , padding: 1}}>
                     Enter the URL:
                 </Typography>
                 <TextField fullWidth 
@@ -53,8 +55,14 @@ const ShorternUrlModalView = (props) => {
                 InputProps={{
                     startAdornment: <InputAdornment position="start">https://</InputAdornment>,
                 }} />
-                <Button onClick={props.handleClose}>Cancel</Button>
-                <Button onClick={() => handleAddUrl()}>Add </Button>
+                <div className='buttons-frame'>
+                    <span className='button-frame'>
+                        <button className='cancel-button' onClick={props.handleClose}>Cancel</button>
+                    </span>
+                    <span className='button-frame'>
+                        <button className='add-button' onClick={() => handleAddUrl()}>Add </button>
+                    </span>
+                </div>
             </Box>
       </Modal>
     )

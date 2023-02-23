@@ -45,6 +45,7 @@ const urlsSlice = createSlice({
             state.total = action.payload.data.total
         })
         builder.addCase(fetchUrls.rejected, (state, action) => {
+            console.log(action.payload)
             state.loading = false
             state.error = action.payload.message
         })

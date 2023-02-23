@@ -1,3 +1,14 @@
-button, label {
-    display: inline;
+.footer {
+    margin-left: 30% ;
+    margin-right : 30% ;
+    padding : 1% ;
+    text-align: center;
+}
+
+.footer-button {
+    width: 25%
+}
+
+.label {
+    padding: 2%
 }

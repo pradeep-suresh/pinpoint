@@ -1,17 +1,24 @@
 table {
     border: 1px solid black;
     border-collapse: collapse;
+    margin: auto;
 }
 
 th, td {
     text-align: center;
-    padding: 3px;
+    padding: 5px;
     border: 1px solid grey;
     border-collapse: collapse;
+    width: 250px;
+    height: 20px ;
 }
 
 .delete {
     cursor: pointer;
     color: blue;
     text-decoration: underline;
+}
+
+.table-border {
+    padding: 15px;
 }

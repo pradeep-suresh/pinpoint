@@ -16,10 +16,10 @@ const DropDownView = () => {
     };
 
     const options = [
-        { label : '5',  value : 5  },
-        { label : '10', value : 10 },
-        { label : '15', value : 15 },
-        { label : '20', value : 20 }
+        { id: 1, label : '5',  value : 5  },
+        { id: 2, label : '10', value : 10 },
+        { id: 3, label : '15', value : 15 },
+        { id: 4, label : '20', value : 20 }
     ]
 
     return (
@@ -29,7 +29,7 @@ const DropDownView = () => {
                 <select value={value} onChange={handleChange}>
                     {
                         options.map((option) => (
-                            <option value={option.value}>{option.label}</option>
+                            <option key={option.id} value={option.value}>{option.label}</option>
                         ))
                     }
                 </select>

@@ -39,7 +39,7 @@ const UrlTableView = () => {
     }
 
     return (
-        <div>
+        <div className='table-border'>
             <table>
                 <thead>
                     <tr>
@@ -52,7 +52,7 @@ const UrlTableView = () => {
                 <tbody>
                     {
                         urls.map(url => (
-                            <tr>
+                            <tr key={url.id}>
                                 <td>{url.url}</td>
                                 <td>{url.short_code}</td>
                                 <td>{url.created_at}</td>

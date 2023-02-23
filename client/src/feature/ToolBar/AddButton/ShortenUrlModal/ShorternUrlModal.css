@@ -1,0 +1,13 @@
+.buttons-frame {
+    text-align: right;
+    padding-top: 5%;
+}
+
+.add-button, .cancel-button {
+    width : 25% ;
+}
+
+.button-frame {
+    display: inline;
+    margin: 0 ;
+}
