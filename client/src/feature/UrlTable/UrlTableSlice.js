@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
+import moment from 'moment'
 
 import { useSelector } from "react-redux";
 
@@ -18,6 +19,15 @@ export const fetchUrls = createAsyncThunk('urls/fetchUrls', (data) => {
     return axios.get(`http://localhost:5004/shortener?page=${page}&per_page=${perPage}`)
 })
 
+export const deleteUrl = createAsyncThunk('urls/deleteUrl', (id) => {
+    return axios.delete(`http://localhost:5004/shortener/${id}`)
+})
+
+export const addUrl = createAsyncThunk('urls/addUrl', (url) => {
+    return axios.post('http://localhost:5004/shortener', {
+        url
+    })
+})
 
 const urlsSlice = createSlice({
     name: 'urls',
@@ -27,7 +37,6 @@ const urlsSlice = createSlice({
             state.loading = true
         })
         builder.addCase(fetchUrls.fulfilled, (state, action) => {
-            console.log(action.payload)
             state.loading = false
             state.urls = action.payload.data.items
             state.page = action.payload.data.page
@@ -38,6 +47,19 @@ const urlsSlice = createSlice({
         builder.addCase(fetchUrls.rejected, (state, action) => {
             state.loading = false
             state.error = action.payload.message
+        })
+        builder.addCase(deleteUrl.fulfilled, (state, action) => {
+            state.urls = state.urls.filter(url => url.id !== parseInt(action.meta.arg))
+            state.total -= 1
+        })
+        builder.addCase(addUrl.fulfilled, (state, action) => {
+            state.urls.unshift({
+                id: action.payload.data.id, 
+                url: action.payload.data.url, 
+                short_code: action.payload.data.short_code, 
+                created_at: moment().format("MMM DD, YYYY")})
+            state.total += 1
+            state.page = 1
         })
     }
 })

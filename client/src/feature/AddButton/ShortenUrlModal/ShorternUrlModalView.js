@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -6,6 +6,9 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+
+import { addUrl, fetchUrls } from '../../UrlTable/UrlTableSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const style = {
     position: 'absolute',
@@ -20,6 +23,17 @@ const style = {
   };
 
 const ShorternUrlModalView = (props) => {
+    const dispatch = useDispatch()
+    const [url, setUrl] = useState('')
+
+    const total = useSelector(state => state.urls.total)
+    const recordsPerPage = useSelector(state => state.showRecordsPerPage.showRecordsPerPage)
+
+    const handleAddUrl = () => {
+        dispatch(addUrl(url), dispatch)
+        props.handleClose()
+    }
+
     return (
         <Modal
             open={props.open}
@@ -33,12 +47,14 @@ const ShorternUrlModalView = (props) => {
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                     Enter the URL:
                 </Typography>
-                <TextField fullWidth variant="outlined"
+                <TextField fullWidth 
+                variant="outlined"
+                onChange={ event => setUrl('https://' + event.target.value)}
                 InputProps={{
                     startAdornment: <InputAdornment position="start">https://</InputAdornment>,
                 }} />
                 <Button onClick={props.handleClose}>Cancel</Button>
-                <Button>Add </Button>
+                <Button onClick={() => handleAddUrl()}>Add </Button>
             </Box>
       </Modal>
     )

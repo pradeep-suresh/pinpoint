@@ -13,7 +13,7 @@ url = api.model('Url', {
     'url' : fields.String(required=True),
     'short_code': fields.String(readOnly=True),
     'active': fields.Boolean,
-    'created_at': fields.DateTime,
+    'created_at': fields.String(readOnly=True),
 })
 
 urls = api.model('Urls', {
@@ -41,7 +41,7 @@ class UrlsList(Resource):
         new_url = Url(url=url, short_code=short_code)
         db.session.add(new_url)
         db.session.flush()
-
+        
         response_object = {
             'id' : new_url.id,
             'url': url,
@@ -58,7 +58,7 @@ class UrlsList(Resource):
         per_page = request.args.get('per_page', 1, type=int)
         response_object = {}
         
-        urls = Url.query.paginate(page=page, per_page=per_page)
+        urls = Url.query.order_by(Url.created_at.desc()).paginate(page=page, per_page=per_page)
         
         items =[]
         
@@ -68,7 +68,7 @@ class UrlsList(Resource):
                 'url': url.url,
                 'active' : url.active,
                 'short_code': url.short_code,
-                'created_at' : url.created_at
+                'created_at' : url.created_at.strftime("%b %d, %Y")
             })
             
         response_object['items'] = items

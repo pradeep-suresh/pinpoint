@@ -9,3 +9,9 @@ th, td {
     border: 1px solid grey;
     border-collapse: collapse;
 }
+
+.delete {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
