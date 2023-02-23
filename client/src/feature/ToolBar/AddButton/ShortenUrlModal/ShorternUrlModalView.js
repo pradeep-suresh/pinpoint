@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
-import { addUrl, fetchUrls } from '../../../UrlTable/UrlTableSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { addUrl } from '../../../UrlTable/UrlTableSlice';
+import { useDispatch } from 'react-redux';
 
 import './ShorternUrlModal.css'
 
@@ -27,9 +26,6 @@ const style = {
 const ShorternUrlModalView = (props) => {
     const dispatch = useDispatch()
     const [url, setUrl] = useState('')
-
-    const total = useSelector(state => state.urls.total)
-    const recordsPerPage = useSelector(state => state.showRecordsPerPage.showRecordsPerPage)
 
     const handleAddUrl = () => {
         dispatch(addUrl(url), dispatch)
