@@ -35,6 +35,8 @@
 
 System API is design using Python's FLASK API from the requirements (https://app.coderpad.io/DTWDGD6W)
 
+Implemented a Rate limiter using Flask-Limiter
+
 - POST /shortener
 - GET /shortener
 - DELETE /shortener/<id\>
