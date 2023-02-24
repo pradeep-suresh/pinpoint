@@ -33,12 +33,18 @@
 ```
 ###### System APIs
 
-System API is design using Python's FLASK API
+System API is design using Python's FLASK API from the requirements (https://app.coderpad.io/DTWDGD6W)
 
+- POST /shortener
+- GET /shortener
+- DELETE /shortener/<id\>
+- GET/<code\>
 
+Access the Swagger API after setting up the project : > http://localhost:5004/doc
+  
 ##### Client
 
-The Client is designed using ReactJS
+The Client is designed using ReactJS, Redux ToolKit and Axios
 
 ##### Database
 
