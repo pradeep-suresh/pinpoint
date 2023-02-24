@@ -28,7 +28,12 @@ const ShorternUrlModalView = (props) => {
     const [url, setUrl] = useState('')
 
     const handleAddUrl = () => {
-        dispatch(addUrl(url), dispatch)
+        if ((url.includes('https://')) || (url.includes('http://'))) {
+            dispatch(addUrl(url), dispatch)
+            console.log('Here')
+        } else {
+            dispatch(addUrl('https://' + url), dispatch)
+        }
         props.handleClose()
     }
 
@@ -47,7 +52,7 @@ const ShorternUrlModalView = (props) => {
                 </Typography>
                 <TextField fullWidth 
                 variant="outlined"
-                onChange={ event => setUrl('https://' + event.target.value)}
+                onChange={ event => setUrl(event.target.value)}
                 InputProps={{
                     startAdornment: <InputAdornment position="start">https://</InputAdornment>,
                 }} />

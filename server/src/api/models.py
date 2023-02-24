@@ -5,7 +5,7 @@ from src import db
 
 class Url(db.Model):
 
-    __tablename__ = 'urls'
+    __tablename__ = "urls"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     url = db.Column(db.String(256), nullable=False)
@@ -16,6 +16,6 @@ class Url(db.Model):
     def __init__(self, url, short_code):
         self.url = url
         self.short_code = short_code
-        
+
     def __repr__(self):
-        return f'{self.short_code, self.url}'
+        return f"{self.short_code, self.url}"
