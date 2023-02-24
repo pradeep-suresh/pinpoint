@@ -23,6 +23,7 @@
 - *Latency:* System should perform at low latency to provide a good experience to ensure retention
 
 ### Components
+
           ------------                            Rate Limiter     
          |Create URL  |                               ||           _ Cache
 Client   |Delete URL  | <---> Load Balancer <---> API servers <---| 
@@ -32,4 +33,26 @@ Client   |Delete URL  | <---> Load Balancer <---> API servers <---|
 
 ###### System APIs
 
+System API is design using Python's FLASK API
 
+##### Client
+
+The Client is designed using ReactJS
+
+##### Database
+
+Postgres Database is used with sqlalchemy as the ORM
+
+### Workflow
+
+*Shortening:*  
+- Each new request for short link computation gets forwarded to the short URL generator by the application server.
+- The short URL generated in the Python API using base58 instead of base64.\n
+- *Characters like O (capital o) and 0 (zero), I (capital I), and l (lower case L) can be confused while characters like + and / should be avoided because of other system-dependent encodings*
+- Upon successful generation of the short link, the system sends one copy back to the user and stores the record in the database for future use.
+
+*Redirection:* 
+- Application servers, upon receiving the redirection requests, check the storage units (caching system and database) for the required record. If found, the application server redirects the user to the associated long URL.
+
+*Deletion* 
+- User can delete a record by requesting the application server which forwards the user details and the associated URL’s information to the database server for deletion.
