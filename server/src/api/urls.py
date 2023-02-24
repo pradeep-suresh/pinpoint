@@ -1,14 +1,13 @@
 from flask import Blueprint, jsonify, request
-from flask_restx import Api, Resource, fields
+from flask_restx import Api, Resource, fields, Namespace
 
 from src import db
 from src.api.models import Url
 from src.utils.encoder import generate_short_code
 
-urls_blueprint = Blueprint("urls", __name__)
-api = Api(urls_blueprint)
+urls_namespace = Namespace("urls")
 
-url = api.model(
+url = urls_namespace.model(
     "Url",
     {
         "id": fields.Integer(readOnly=True),
@@ -19,7 +18,7 @@ url = api.model(
     },
 )
 
-urls = api.model(
+urls = urls_namespace.model(
     "Urls",
     {
         "items": fields.List(fields.Nested(url)),
@@ -30,35 +29,9 @@ urls = api.model(
     },
 )
 
-
-class UrlsList(Resource):    
-    @api.expect(url, validate=True)
-    def post(self):
-        payload = request.get_json()
-        url = payload.get("url")
-        response_object = {}
-
-        url_exists = Url.query.filter_by(url=url).first()
-        if url_exists:
-            response_object["message"] = f"The shortened url for {url} already exisits"
-            return response_object, 400
-
-        short_code = generate_short_code(url).decode()
-        new_url = Url(url=url, short_code=short_code)
-        db.session.add(new_url)
-        db.session.flush()
-
-        response_object = {
-            "id": new_url.id,
-            "url": url,
-            "short_code": str(short_code),
-            "created_at": str(new_url.created_at),
-        }
-
-        db.session.commit()
-        return response_object, 201
-
-    @api.marshal_with(urls)
+class UrlsList(Resource):
+    @urls_namespace.response(200, "The list of URLs in the database with page and per_page parameter")
+    @urls_namespace.marshal_with(urls)
     def get(self):
         page = request.args.get("page", 1, type=int)
         per_page = request.args.get("per_page", 1, type=int)
@@ -88,12 +61,41 @@ class UrlsList(Resource):
         response_object["per_page"] = urls.per_page
 
         return response_object, 200
+    
+    @urls_namespace.response(400, "The URL already exists")
+    @urls_namespace.response(201, "Shortcode for the url has been generated")
+    @urls_namespace.expect(url, validate=True)
+    def post(self):
+        payload = request.get_json()
+        url = payload.get("url")
+        response_object = {}
 
+        url_exists = Url.query.filter_by(url=url).first()
+        if url_exists:
+            response_object["message"] = f"The shortened url for {url} already exisits"
+            return response_object, 400
+
+        short_code = generate_short_code(url).decode()
+        new_url = Url(url=url, short_code=short_code)
+        db.session.add(new_url)
+        db.session.flush()
+
+        response_object = {
+            "id": new_url.id,
+            "url": url,
+            "short_code": str(short_code),
+            "created_at": str(new_url.created_at),
+        }
+
+        db.session.commit()
+        return response_object, 201
+
+class DeleteUrl(Resource):    
     def delete(self, id):
         url = Url.query.filter_by(id=id).first()
         db.session.delete(url)
         db.session.commit()
 
 
-api.add_resource(UrlsList, "/shortener")
-api.add_resource(UrlsList, "/shortener/<int:id>")
+urls_namespace.add_resource(UrlsList, "")
+urls_namespace.add_resource(DeleteUrl, "/<int:id>")

@@ -28,17 +28,7 @@ def create_app(script_info=None):
     # set up extensions
     db.init_app(app)
 
-    # register blueprints
-    from src.api.ping import ping_blueprint
-
-    app.register_blueprint(ping_blueprint)
-
-    from src.api.urls import urls_blueprint
-
-    app.register_blueprint(urls_blueprint)
-
-    from src.api.redirect import redirect_blueprint
-
-    app.register_blueprint(redirect_blueprint)
+    from src.api import api
+    api.init_app(app)
 
     return app

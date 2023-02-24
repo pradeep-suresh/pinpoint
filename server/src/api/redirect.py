@@ -1,11 +1,10 @@
 from flask import Blueprint, redirect, url_for
-from flask_restx import Api, Resource, fields
+from flask_restx import Api, Resource, fields, Namespace
 
 from src import db
 from src.api.models import Url
 
-redirect_blueprint = Blueprint("redirect", __name__)
-api = Api(redirect_blueprint)
+redirect_namespace = Namespace("redirect")
 
 
 class Redirect(Resource):    
@@ -17,4 +16,4 @@ class Redirect(Resource):
             return response
 
 
-api.add_resource(Redirect, "/<string:code>")
+redirect_namespace.add_resource(Redirect, "<string:code>")
