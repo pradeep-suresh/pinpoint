@@ -20,9 +20,11 @@ Access the server(Flask API)
 The Link hyperlink in the URL column will use the code generated to redirect to the listed URL.
 
 
-In case of errors:
+## In case of errors:
 
 Ensure that the database is set up using this command
 > $ docker-compose exec api python manage.py recreate_db
 
 Ensure that you have not exceeded the rate limt (500 requests per minute)
+
+
