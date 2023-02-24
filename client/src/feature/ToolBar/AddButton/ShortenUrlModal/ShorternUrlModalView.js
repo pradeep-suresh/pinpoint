@@ -6,8 +6,8 @@ import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import Box from '@mui/material/Box';
 
-import { addUrl } from '../../../UrlTable/UrlTableSlice';
-import { useDispatch } from 'react-redux';
+import { addUrl, resetError } from '../../../UrlTable/UrlTableSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 import './ShorternUrlModal.css'
 
@@ -25,7 +25,16 @@ const style = {
 
 const ShorternUrlModalView = (props) => {
     const dispatch = useDispatch()
+    const error = useSelector(state => state.urls.error)
+
     const [url, setUrl] = useState('')
+    const [openErrorModal, setOpenErrorModal] = useState(false);
+    
+    const handleErrorModalClose = () => {
+        setOpenErrorModal(false);
+        dispatch(resetError())
+    }
+    const handleErrorModalOpen = () => setOpenErrorModal(true)
 
     const handleAddUrl = () => {
         if ((url.includes('https://')) || (url.includes('http://'))) {
@@ -37,7 +46,16 @@ const ShorternUrlModalView = (props) => {
         props.handleClose()
     }
 
+    useEffect(() => {
+        if (error === true) {
+            handleErrorModalOpen()
+        } else {
+            handleErrorModalClose()
+        }
+    },[error])
+
     return (
+        <div>
         <Modal
             open={props.open}
             onClose={props.handleClose}
@@ -66,6 +84,23 @@ const ShorternUrlModalView = (props) => {
                 </div>
             </Box>
       </Modal>
+      <Modal
+        open={openErrorModal}
+        onClose={handleErrorModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+        <Box sx={style}>
+            <Typography id="modal-modal-description" sx={{ mt: 2 , padding: 1}}>
+                Shortcode for this URL has already been created
+            </Typography>
+            <div className='modal-buttons-frame'>
+                <span className='modal-button-frame'>
+                    <button className='ok-button' onClick={ () => handleErrorModalClose()}>Ok</button>
+                </span>
+            </div>
+            </Box>
+        </Modal>
+      </div>
     )
 }
 

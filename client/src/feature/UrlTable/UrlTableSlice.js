@@ -33,6 +33,11 @@ export const addUrl = createAsyncThunk('urls/addUrl', (url) => {
 const urlsSlice = createSlice({
     name: 'urls',
     initialState,
+    reducers: {
+        resetError: (state) => {
+            state.error = false
+        }
+    } ,
     extraReducers: (builder) => {
         builder.addCase(fetchUrls.pending, (state, action) => {
             state.loading = true
@@ -62,9 +67,10 @@ const urlsSlice = createSlice({
             state.page = 1
         })
         builder.addCase(addUrl.rejected, (state, action) => {
-            state.error = "The URL has already been added"
+            state.error = true
         })
     }
 })
 
 export default urlsSlice.reducer
+export const { resetError } = urlsSlice.actions
