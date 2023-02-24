@@ -18,3 +18,9 @@ Access the server(Flask API)
 > http://localhost:5004
 
 The Link hyperlink in the URL column will use the code generated to redirect to the listed URL.
+
+
+In case of errors:
+
+Ensure that the database is set up using this command
+> $ docker-compose exec api python manage.py recreate_db
