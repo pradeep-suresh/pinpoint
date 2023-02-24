@@ -31,7 +31,7 @@ urls = api.model(
 )
 
 
-class UrlsList(Resource):
+class UrlsList(Resource):    
     @api.expect(url, validate=True)
     def post(self):
         payload = request.get_json()

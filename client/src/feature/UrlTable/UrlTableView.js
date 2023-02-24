@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { styled } from '@mui/material/styles';
 import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 import './UrlTableView.css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,6 +21,10 @@ const LightTooltip = styled(({ className, ...props }) => (
       fontSize: 11,
     },
   }));
+
+const clickToCopy = (code) => {
+    navigator.clipboard.writeText(`${API_URL}/${code}`)
+}
 
 const UrlTableView = () => {
     const dispatch = useDispatch()
@@ -79,7 +84,13 @@ const UrlTableView = () => {
                                 <td className='link'>
                                     <a href={API_URL + '/' + url.short_code} target='_blank'>Link</a>
                                 </td>
-                                <td>{url.short_code}</td>
+                                <td>{url.short_code} &nbsp;&nbsp; 
+                                    <LightTooltip title='Click to copy'>
+                                        <ContentCopyIcon className='icon' 
+                                        fontSize='small'
+                                        onClick={() =>{clickToCopy(url.short_code)} }/>
+                                    </LightTooltip>
+                                </td>
                                 <td>{url.created_at}</td>
                                 <td className='delete' onClick={() => handleDelete(url)}>Delete</td>
                             </tr>

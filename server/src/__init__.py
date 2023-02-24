@@ -6,6 +6,9 @@ from flask_cors import CORS
 from flask_restx import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 db = SQLAlchemy()
 
 
@@ -19,8 +22,9 @@ def create_app(script_info=None):
     app_settings = os.getenv("APP_SETTINGS")
     app.config.from_object(app_settings)
 
-    print(app.config, file=sys.stderr)
-
+    # set up rate limiter
+    limiter = Limiter(get_remote_address, app=app, storage_uri="memory://", default_limits=["100 per minute"])
+    
     # set up extensions
     db.init_app(app)
 

@@ -8,7 +8,7 @@ redirect_blueprint = Blueprint("redirect", __name__)
 api = Api(redirect_blueprint)
 
 
-class Redirect(Resource):
+class Redirect(Resource):    
     def get(self, code):
         link = Url.query.filter_by(short_code=code).first().__dict__
         if link:

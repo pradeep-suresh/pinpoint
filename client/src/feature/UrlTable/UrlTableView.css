@@ -7,6 +7,17 @@ th {
     background-color: lightgrey;
 }
 
+.ellipsis {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    padding: 5px;
+}
+
 th, td {
     text-align: center;
     padding: 5px;
@@ -14,17 +25,6 @@ th, td {
     border-collapse: collapse;
     width: 250px;
     height: 20px ;
-}
-
-.ellipsis {
-    display: inline-block;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-    border-left: 0;
-    border-top: 0;
-    border-right: 0;
-    padding: 5px;
 }
 
 .link {
@@ -41,4 +41,8 @@ th, td {
 
 .table-border {
     padding: 15px;
+}
+
+.icon {
+    cursor: pointer;
 }
