@@ -16,15 +16,13 @@ const FooterView = () => {
 
     const handlePreviousButton = () => {
         if (page-1 > 0) {
-            //dispatch(fetchUrls({page:page-1, perPage:perPage})) 
-            console.log('Triggered Previous button')
+            dispatch(fetchUrls({page:page-1, perPage:perPage})) 
         }
     }
 
     const handleNextButton = () => {
         if (page+1 <= pages) {
-            //dispatch(fetchUrls({page:page+1, perPage:perPage}))
-            console.log('Triggered Next Button')
+            dispatch(fetchUrls({page:page+1, perPage:perPage}))
         }
     }
 
