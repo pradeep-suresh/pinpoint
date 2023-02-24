@@ -7,16 +7,16 @@ import { useSelector } from "react-redux";
 const initialState = {
     loading : false,
     urls : [],
-    page : 0,
-    pages : 0,
-    perPage : 0,
+    page : 1,
+    pages : 1,
+    perPage : 5,
     total : 0,
     error: ''
 }
 
 export const fetchUrls = createAsyncThunk('urls/fetchUrls', (data) => {
     const {page, perPage } = data
-    return axios.get(`http://localhost:5004/shortener?page=${page}&per_page=${perPage}`)
+        return axios.get(`http://localhost:5004/shortener?page=${page}&per_page=${perPage}`)
 })
 
 export const deleteUrl = createAsyncThunk('urls/deleteUrl', (id) => {
@@ -45,9 +45,7 @@ const urlsSlice = createSlice({
             state.total = action.payload.data.total
         })
         builder.addCase(fetchUrls.rejected, (state, action) => {
-            console.log(action.payload)
             state.loading = false
-            state.error = action.payload.message
         })
         builder.addCase(deleteUrl.fulfilled, (state, action) => {
             state.urls = state.urls.filter(url => url.id !== parseInt(action.meta.arg))
@@ -61,6 +59,9 @@ const urlsSlice = createSlice({
                 created_at: moment().format("MMM DD, YYYY")})
             state.total += 1
             state.page = 1
+        })
+        builder.addCase(addUrl.rejected, (state, action) => {
+            state.error = "The URL has already been added"
         })
     }
 })

@@ -15,7 +15,7 @@ def create_app(script_info=None):
     app = Flask(__name__)
     cors = CORS(app, resources = {
         '/shortener/*' : {
-            'origins' : 'http://localhost:3000'
+            'origins' : 'http://localhost:3007'
         }
     })
 

@@ -26,7 +26,7 @@ const DropDownView = () => {
         <div className='dropdown'>
             <label>
                 Show &nbsp;
-                <select value={value} onChange={handleChange}>
+                <select value={value} onChange={(event) => handleChange(event)}>
                     {
                         options.map((option) => (
                             <option key={option.id} value={option.value}>{option.label}</option>

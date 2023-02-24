@@ -12,6 +12,10 @@ const UrlTableView = () => {
     const page = useSelector(state => state.urls.page)
     const urls = useSelector(state => state.urls.urls)
     const total = useSelector(state => state.urls.total)
+
+    useEffect(() => {
+        dispatch(fetchUrls({page: 1, perPage: recordsPerPage}))
+    },[dispatch])
     
     useEffect(() => {
         dispatch(fetchUrls({page: 1, perPage: recordsPerPage}))
