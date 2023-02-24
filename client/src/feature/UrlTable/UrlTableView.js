@@ -85,7 +85,7 @@ const UrlTableView = () => {
                                     <a href={API_URL + '/' + url.short_code} target='_blank'>Link</a>
                                 </td>
                                 <td>{url.short_code} &nbsp;&nbsp; 
-                                    <LightTooltip title='Click to copy'>
+                                    <LightTooltip title='Click to copy link'>
                                         <ContentCopyIcon className='icon' 
                                         fontSize='small'
                                         onClick={() =>{clickToCopy(url.short_code)} }/>
