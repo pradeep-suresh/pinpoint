@@ -11,9 +11,6 @@ Create the database:
 Seed the database:
 > $ docker-compose exec api python manage.py seed_db
 
-To run server tests:
-> $ docker-compose exec api python -m pytest -s "src/tests"
-
 Access the client/UI(May take a minute or two to come up):
 > http://localhost:3005
 
@@ -25,7 +22,6 @@ Access the Swagger API doc
 
 The Link hyperlink in the URL column will use the code generated to redirect to the listed URL.
 
-
 ## In case of errors:
 
 Ensure that the database is set up and seeded using this command
@@ -34,4 +30,10 @@ Ensure that the database is set up and seeded using this command
 
 Ensure that you have not exceeded the rate limt (500 requests per minute)
 
+## To run tests 
 
+To run server tests:
+> $ docker-compose exec api python -m pytest -s "src/tests"
+
+To run client tests:
+> $ docker-compose exec client npm test
