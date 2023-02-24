@@ -8,6 +8,13 @@ Build and spin up the new containers:
 Create the database:
 > $ docker-compose exec api python manage.py recreate_db
 
+To run server tests:
+> $ docker-compose exec api python -m pytest -s "src/tests"
+
 Access the client/UI(May take a minute or two to come up):
 > http://localhost:3005
 
+Access the server(Flask API)
+> http://localhost:5004
+
+The Link hyperlink in the URL column will use the code generated to redirect to the listed URL.
