@@ -26,6 +26,7 @@ The Link hyperlink in the URL column will use the code generated to redirect to 
 
 Ensure that the database is set up 
 > $ docker-compose exec api python manage.py recreate_db
+
 Ensure database is seeded
 > $ docker-compose exec api python manage.py seed_db
 
