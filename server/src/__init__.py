@@ -23,7 +23,7 @@ def create_app(script_info=None):
     app.config.from_object(app_settings)
 
     # set up rate limiter
-    limiter = Limiter(get_remote_address, app=app, storage_uri="memory://", default_limits=["100 per minute"])
+    limiter = Limiter(get_remote_address, app=app, storage_uri="memory://", default_limits=["500 per minute"])
     
     # set up extensions
     db.init_app(app)

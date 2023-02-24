@@ -24,3 +24,5 @@ In case of errors:
 
 Ensure that the database is set up using this command
 > $ docker-compose exec api python manage.py recreate_db
+
+Ensure that you have not exceeded the rate limt (500 requests per minute)
