@@ -24,8 +24,9 @@ The Link hyperlink in the URL column will use the code generated to redirect to 
 
 ## In case of errors:
 
-Ensure that the database is set up and seeded using this command
+Ensure that the database is set up 
 > $ docker-compose exec api python manage.py recreate_db
+Ensure database is seeded
 > $ docker-compose exec api python manage.py seed_db
 
 Ensure that you have not exceeded the rate limt (500 requests per minute)
