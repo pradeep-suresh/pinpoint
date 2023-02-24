@@ -37,3 +37,4 @@ To run server tests:
 
 To run client tests:
 > $ docker-compose exec client npm test
+
