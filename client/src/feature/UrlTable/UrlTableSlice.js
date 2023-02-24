@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios'
 import moment from 'moment'
 
-import { useSelector } from "react-redux";
 
 const initialState = {
     loading : false,
@@ -14,17 +13,19 @@ const initialState = {
     error: ''
 }
 
+const API_URL = process.env.REACT_APP_API_SERVICE_URL
+
 export const fetchUrls = createAsyncThunk('urls/fetchUrls', (data) => {
     const {page, perPage } = data
-        return axios.get(`http://localhost:5004/shortener?page=${page}&per_page=${perPage}`)
+        return axios.get(`${API_URL}/shortener?page=${page}&per_page=${perPage}`)
 })
 
 export const deleteUrl = createAsyncThunk('urls/deleteUrl', (id) => {
-    return axios.delete(`http://localhost:5004/shortener/${id}`)
+    return axios.delete(`${API_URL}/shortener/${id}`)
 })
 
 export const addUrl = createAsyncThunk('urls/addUrl', (url) => {
-    return axios.post('http://localhost:5004/shortener', {
+    return axios.post(`${API_URL}/shortener`, {
         url
     })
 })

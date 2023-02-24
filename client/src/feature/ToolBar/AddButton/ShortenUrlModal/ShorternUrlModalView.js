@@ -51,11 +51,11 @@ const ShorternUrlModalView = (props) => {
                 InputProps={{
                     startAdornment: <InputAdornment position="start">https://</InputAdornment>,
                 }} />
-                <div className='buttons-frame'>
-                    <span className='button-frame'>
+                <div className='modal-buttons-frame'>
+                    <span className='modal-button-frame'>
                         <button className='cancel-button' onClick={props.handleClose}>Cancel</button>
                     </span>
-                    <span className='button-frame'>
+                    <span className='modal-button-frame'>
                         <button className='add-button' onClick={() => handleAddUrl()}>Add </button>
                     </span>
                 </div>

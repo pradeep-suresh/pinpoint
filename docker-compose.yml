@@ -36,7 +36,7 @@ services:
             - './client:/usr/src/app'
             - '/usr/src/app/node_modules'
         ports:
-        - 3007:3000
+        - 3005:3000
         environment:
             - NODE_ENV=deployment
             - REACT_APP_API_SERVICE_URL=http://localhost:5004

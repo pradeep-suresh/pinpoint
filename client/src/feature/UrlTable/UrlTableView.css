@@ -6,13 +6,28 @@ table {
 
 th, td {
     text-align: center;
-    padding: 5px;
+    padding: px;
     border: 1px solid grey;
     border-collapse: collapse;
     width: 250px;
     height: 20px ;
 }
 
+.ellipsis {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+}
+
+.link {
+    height: 20px ;
+    width: 30px ;
+    border-left: 0;
+    padding-right: 4px;
+}
 .delete {
     cursor: pointer;
     color: blue;

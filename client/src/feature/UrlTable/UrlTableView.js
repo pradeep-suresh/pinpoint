@@ -5,6 +5,8 @@ import { useEffect } from 'react'
 
 import { fetchUrls, deleteUrl } from './UrlTableSlice'
 
+const API_URL = process.env.REACT_APP_API_SERVICE_URL
+
 const UrlTableView = () => {
     const dispatch = useDispatch()
     
@@ -47,7 +49,7 @@ const UrlTableView = () => {
             <table>
                 <thead>
                     <tr>
-                        <th>URL</th>
+                        <th colSpan="2">URL</th>
                         <th>Code</th>
                         <th>Created At</th>
                         <th>Action </th>
@@ -57,7 +59,10 @@ const UrlTableView = () => {
                     {
                         urls.map(url => (
                             <tr key={url.id}>
-                                <td>{url.url}</td>
+                                <td className='ellipsis'>{url.url}</td>
+                                <td className='link'>
+                                    <a href={API_URL + '/' + url.short_code} target='_blank'>Link</a>
+                                </td>
                                 <td>{url.short_code}</td>
                                 <td>{url.created_at}</td>
                                 <td className='delete' onClick={() => handleDelete(url)}>Delete</td>
