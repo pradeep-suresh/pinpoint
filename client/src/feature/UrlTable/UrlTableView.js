@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { styled } from '@mui/material/styles';
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+
 import './UrlTableView.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -6,6 +9,17 @@ import { useEffect } from 'react'
 import { fetchUrls, deleteUrl } from './UrlTableSlice'
 
 const API_URL = process.env.REACT_APP_API_SERVICE_URL
+
+const LightTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: theme.palette.common.white,
+      color: 'rgba(0, 0, 0, 0.87)',
+      boxShadow: theme.shadows[1],
+      fontSize: 11,
+    },
+  }));
 
 const UrlTableView = () => {
     const dispatch = useDispatch()
@@ -59,7 +73,9 @@ const UrlTableView = () => {
                     {
                         urls.map(url => (
                             <tr key={url.id}>
-                                <td className='ellipsis'>{url.url}</td>
+                                <LightTooltip title={url.url}>
+                                    <td className='ellipsis'>{url.url}</td>
+                                </LightTooltip>
                                 <td className='link'>
                                     <a href={API_URL + '/' + url.short_code} target='_blank'>Link</a>
                                 </td>
