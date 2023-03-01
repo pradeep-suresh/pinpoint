@@ -66,4 +66,9 @@ Postgres Database is used with sqlalchemy as the ORM
 *Deletion* 
 - User can delete a record by requesting the application server which forwards the user details and the associated URL’s information to the database server for deletion.
 
+__References:__
 
+[1] https://www.eddywm.com/lets-build-a-url-shortener-in-go-part-3-short-link-generation/
+[2] https://en.bitcoin.it/wiki/Base58Check_encoding?ref=eddy-wm
+[3] https://blog.logrocket.com/how-build-url-shortener-node-js/
+[4] System Design Interviews by Alex Xu 
